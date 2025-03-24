@@ -1,5 +1,4 @@
 #include "header.h"
-#define _OPEN_SYS_ITOA_EXT
 #include <stdlib.h>
 
 

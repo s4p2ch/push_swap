@@ -3,4 +3,5 @@
 #include <unistd.h>
 
 
+int ft_strlen(char *str);
 int ft_write(char *mes);
