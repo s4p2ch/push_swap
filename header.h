@@ -6,7 +6,7 @@
 /*   By: nmkrtchy <nmkrtchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:20:03 by nmkrtchy          #+#    #+#             */
-/*   Updated: 2025/03/25 22:59:09 by nmkrtchy         ###   ########.fr       */
+/*   Updated: 2025/03/26 01:01:45 by nmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct s_stack
     int size;
     int *arr;
 } t_stack;
-
 
 int	ft_strlen(char *str);
 int	ft_write(char *mes);
