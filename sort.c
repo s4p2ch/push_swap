@@ -42,7 +42,6 @@ void sort_stack(int *stack, int size)
     printf("size:%d\n", size);
     (void)b;
     (void)instr_counter;
-
 //    while(instr_counter != MAX_INSTR)
  //       if()
     apply(SA, a);
