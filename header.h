@@ -6,7 +6,7 @@
 /*   By: nmkrtchy <nmkrtchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:20:03 by nmkrtchy          #+#    #+#             */
-/*   Updated: 2025/03/26 01:01:45 by nmkrtchy         ###   ########.fr       */
+/*   Updated: 2025/03/26 18:36:37 by nmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define MAX_INSTR 5500
+# define MAX_OPS 5500
 
 typedef enum e_op {
     SA, SB, SS, PA, PB, RA, RB, RR, RRA, RRB, RRR
@@ -30,7 +30,8 @@ typedef struct s_stack
 } t_stack;
 
 int	ft_strlen(char *str);
-int	ft_write(char *mes);
+void print_seq(t_op[], size_t);
 void sort_stack(int *stack, int size);
+int	frequency(int *arr, int size, int num);
 
 #endif

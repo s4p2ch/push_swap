@@ -6,7 +6,7 @@
 /*   By: nmkrtchy <nmkrtchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:19:48 by nmkrtchy          #+#    #+#             */
-/*   Updated: 2025/03/25 23:12:41 by nmkrtchy         ###   ########.fr       */
+/*   Updated: 2025/03/26 17:04:47 by nmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	parse(char *strnum, int *arr, int i)
 	int	num;
 
 	num = ft_atoi(strnum, &i);
-	if (i < 0 || in_arr(arr, i, num))
+	if (i < 0 || frequency(arr, i, num))
 		return (EXIT_FAILURE);
 	arr[i] = num;
 	return (EXIT_SUCCESS);

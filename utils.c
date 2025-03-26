@@ -6,7 +6,7 @@
 /*   By: nmkrtchy <nmkrtchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:19:52 by nmkrtchy          #+#    #+#             */
-/*   Updated: 2025/03/25 21:20:30 by nmkrtchy         ###   ########.fr       */
+/*   Updated: 2025/03/26 18:49:10 by nmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,48 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int	ft_write(char *mes)
+// the 3d arg in 1st write "2 + seq[i] > 7"
+// is the length
+// for 2-char ops with values 0-7 it would be 2
+// for 3-char ops with values 8+ it would be 3
+void print_seq(t_op seq[], size_t size)
 {
-	write(1, mes, ft_strlen(mes));
-	return (0);
+	const char 		*op_names[11];
+	size_t			i;
+
+    op_names[SA] = "sa";
+    op_names[SB] = "sb";
+    op_names[SS] = "ss";
+    op_names[PA] = "pa";
+    op_names[PB] = "pb";
+    op_names[RA] = "ra";
+    op_names[RB] = "rb";
+    op_names[RR] = "rr";
+    op_names[RRA] = "rra";
+    op_names[RRB] = "rrb";
+    op_names[RRR] = "rrr";
+	while(i < size)
+	{
+		write(1, op_names[seq[i]], 2 + seq[i] > 7);
+		write(1, (char []){'\n', 0}, 1);
+	}
 }
 
-void	ft_putn(long n)
+int	frequency(int *arr, int size, int num)
 {
-	if (n < 0)
-	{
-		write(1, (char []){'-', 0}, 1);
-		n *= -1;
-	}
-	if (n >= 10)
-	{
-		ft_putn(n / 10);
-		ft_putn(n % 10);
-	}
+	int res;
+
+	res = 0;
+	while (size >= 0)
+		if (*arr == num)
+		{
+			res++;
+			arr++;
+		}
 	else
-		write(1, (char []){n + '0', 0}, 1);
+	{
+		size--;
+		arr++;
+	}
+	return (res);
 }
