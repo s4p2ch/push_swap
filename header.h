@@ -6,7 +6,7 @@
 /*   By: nmkrtchy <nmkrtchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:20:03 by nmkrtchy          #+#    #+#             */
-/*   Updated: 2025/03/26 18:36:37 by nmkrtchy         ###   ########.fr       */
+/*   Updated: 2025/03/30 16:16:43 by nmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,14 @@ typedef enum e_op {
 
 typedef struct s_stack
 {
-    int size;
+    size_t size;
     int *arr;
 } t_stack;
 
 int	ft_strlen(char *str);
+void ft_write(char *str);
 void print_seq(t_op[], size_t);
-void sort_stack(int *stack, int size);
-int	frequency(int *arr, int size, int num);
+void sort_stack(int *stack, size_t ssize);
+int	frequency(void *arr, int size, int num);
 
 #endif

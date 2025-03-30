@@ -6,7 +6,7 @@
 /*   By: nmkrtchy <nmkrtchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:19:48 by nmkrtchy          #+#    #+#             */
-/*   Updated: 2025/03/26 17:04:47 by nmkrtchy         ###   ########.fr       */
+/*   Updated: 2025/03/30 16:09:08 by nmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	parse(char *strnum, int *arr, int i)
 int	main(int argc, char **argv)
 {
 	int		*arr;
-	int		i;
+	size_t	i;
 
 	if (argc < 2)
 		return (ft_write(argv[0]), EXIT_FAILURE);

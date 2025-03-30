@@ -6,7 +6,7 @@
 /*   By: nmkrtchy <nmkrtchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:19:52 by nmkrtchy          #+#    #+#             */
-/*   Updated: 2025/03/26 18:49:10 by nmkrtchy         ###   ########.fr       */
+/*   Updated: 2025/03/30 16:15:54 by nmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-// the 3d arg in 1st write "2 + seq[i] > 7"
-// is the length
-// for 2-char ops with values 0-7 it would be 2
-// for 3-char ops with values 8+ it would be 3
+void ft_write(char *str)
+{
+	write(1, str, ft_strlen(str));
+}
+
 void print_seq(t_op seq[], size_t size)
 {
 	const char 		*op_names[11];
@@ -42,20 +43,22 @@ void print_seq(t_op seq[], size_t size)
     op_names[RRA] = "rra";
     op_names[RRB] = "rrb";
     op_names[RRR] = "rrr";
+	i = 0;
 	while(i < size)
 	{
-		write(1, op_names[seq[i]], 2 + seq[i] > 7);
-		write(1, (char []){'\n', 0}, 1);
+		ft_write((char *)op_names[seq[i]]);
+		ft_write("\n");
+		i++;
 	}
 }
 
-int	frequency(int *arr, int size, int num)
+int	frequency(void *arr, int size, int num)
 {
 	int res;
 
 	res = 0;
 	while (size >= 0)
-		if (*arr == num)
+		if (*(int *)arr == num)
 		{
 			res++;
 			arr++;
