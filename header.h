@@ -6,7 +6,7 @@
 /*   By: nmkrtchy <nmkrtchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:20:03 by nmkrtchy          #+#    #+#             */
-/*   Updated: 2025/03/31 16:56:48 by nmkrtchy         ###   ########.fr       */
+/*   Updated: 2025/03/31 19:59:11 by nmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define MAX_OPS 5500
 
 typedef enum e_op {
-    SA, SB, SS, PA, PB, RA, RB, RR, RRA, RRB, RRR
+    SA, SB, SS, PA, PB, RA, RB, RR, RRA, RRB, RRR, SIZE
 } t_op;
 
 typedef struct s_stack
@@ -38,5 +38,9 @@ void ft_write(char *str);
 void print_seq(t_op[], size_t);
 void sort_stack(int *stack, size_t ssize);
 int	frequency(void *arr, int size, int num);
+
+void apply_op(t_op op, t_stack *a_stack, t_stack *b_stack);
+
+int brute_force(t_stack *a, t_stack *b, size_t depth, t_op *seq, size_t ssize);
 
 #endif
