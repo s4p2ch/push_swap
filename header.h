@@ -6,7 +6,7 @@
 /*   By: nmkrtchy <nmkrtchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:20:03 by nmkrtchy          #+#    #+#             */
-/*   Updated: 2025/03/31 19:59:11 by nmkrtchy         ###   ########.fr       */
+/*   Updated: 2025/04/04 13:06:08 by nmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ typedef struct s_stack
     int *arr;
 } t_stack;
 
+typedef struct s_seq {
+	t_op op[MAX_OPS];
+	size_t size;
+} t_seq;
+
 int is_sorted(t_stack *a);
 void swap(int arr[]);
 void push(t_stack *stack, int num, char shift);
@@ -38,9 +43,11 @@ void ft_write(char *str);
 void print_seq(t_op[], size_t);
 void sort_stack(int *stack, size_t ssize);
 int	frequency(void *arr, int size, int num);
+void normalize(int *stack, size_t size);
 
 void apply_op(t_op op, t_stack *a_stack, t_stack *b_stack);
 
+void radix_sort(t_stack *a, t_stack *b);
 int brute_force(t_stack *a, t_stack *b, size_t depth, t_op *seq, size_t ssize);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nmkrtchy <nmkrtchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:19:52 by nmkrtchy          #+#    #+#             */
-/*   Updated: 2025/03/30 16:15:54 by nmkrtchy         ###   ########.fr       */
+/*   Updated: 2025/04/03 11:23:24 by nmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void print_seq(t_op seq[], size_t size)
 	}
 }
 
+// incorrect output with
+// ./main 9 8 3 4 2 6 4
 int	frequency(void *arr, int size, int num)
 {
 	int res;
@@ -62,6 +64,7 @@ int	frequency(void *arr, int size, int num)
 		{
 			res++;
 			arr++;
+			size--;
 		}
 	else
 	{
