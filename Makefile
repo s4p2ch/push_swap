@@ -1,10 +1,10 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -std=c11
 
-TARGET =  main
+TARGET =  push_swap
 SRCS = main.c
 
-DEPS = header.h utils.c sort.c array.c brute.c
+DEPS = header.h utils.c sort.c array.c radix.c ops.c
 all: $(TARGET)
 
 $(TARGET): $(SRCS) $(DEPS)

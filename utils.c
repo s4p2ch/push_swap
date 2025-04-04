@@ -6,7 +6,7 @@
 /*   By: nmkrtchy <nmkrtchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:19:52 by nmkrtchy          #+#    #+#             */
-/*   Updated: 2025/03/30 16:15:54 by nmkrtchy         ###   ########.fr       */
+/*   Updated: 2025/04/04 19:58:44 by nmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void print_seq(t_op seq[], size_t size)
 	}
 }
 
+// incorrect output with
+// ./main 9 8 3 4 2 6 4
 int	frequency(void *arr, int size, int num)
 {
 	int res;
@@ -62,6 +64,7 @@ int	frequency(void *arr, int size, int num)
 		{
 			res++;
 			arr++;
+			size--;
 		}
 	else
 	{
@@ -70,3 +73,48 @@ int	frequency(void *arr, int size, int num)
 	}
 	return (res);
 }
+
+
+
+// Calculate the cost of moving an element to the top of stack A
+// int cost_to_top(size_t pos, size_t size)
+// {
+//     if (pos <= size / 2)
+//         return pos; // Use ra
+//     else
+//         return size - pos; // Use rra
+// }
+
+// // Move element at position pos to the top of stack A
+// void move_to_top_a(t_stack *a, t_stack *b, size_t pos)
+// {
+//     if (pos <= a->size / 2)
+//     {
+//         // Use ra
+//         for (size_t i = 0; i < pos; i++)
+//             apply_op(RA, a, b);
+//     }
+//     else
+//     {
+//         // Use rra
+//         for (size_t i = 0; i < a->size - pos; i++)
+//             apply_op(RRA, a, b);
+//     }
+// }
+
+// // Move element at position pos to the top of stack B
+// void move_to_top_b(t_stack *a, t_stack *b, size_t pos)
+// {
+//     if (pos <= b->size / 2)
+//     {
+//         // Use rb
+//         for (size_t i = 0; i < pos; i++)
+//             apply_op(RB, a, b);
+//     }
+//     else
+//     {
+//         // Use rrb
+//         for (size_t i = 0; i < b->size - pos; i++)
+//             apply_op(RRB, a, b);
+//     }
+// }

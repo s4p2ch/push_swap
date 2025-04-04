@@ -1,56 +1,68 @@
 #include "header.h"
 
-void apply_op(t_op op, t_stack *a_stack, t_stack *b_stack)
+
+
+void sort_small(t_stack *a, t_stack *b)
 {
-    if (op == SA || op == SB || op == SS)
+    if (a->size == 2)
     {
-        if (a_stack -> size && (op == SA || op == SS))
-            swap(a_stack->arr);
-        if (op == SB || op == SS)
-            swap(b_stack->arr);
+        if (a->arr[0] > a->arr[1])
+            apply_op(SA, a, b);
     }
-    else if (op == PA)
-        push(a_stack, pop(b_stack, 1), 1);
-    else if (op == PB)
-        push(b_stack, pop(a_stack, 1), 1);
-    if (op == RA || op == RR)
-        push(a_stack, pop(a_stack, 1), -1);
-    if (op == RB || op == RR)
-        push(b_stack, pop(b_stack, 1), -1);
-
-    if (op == RRA || op == RRR)
-        push(a_stack, pop(a_stack, -1), 1);
-    if (op == RRB || op == RRR)
-        push(b_stack, pop(b_stack, -1), 1);
+    else if (a->size == 3)
+    {
+        if (a->arr[0] > a->arr[1] && a->arr[0] > a->arr[2])
+        {
+            apply_op(RA, a, b);
+            if (a->arr[0] > a->arr[1])
+                apply_op(SA, a, b);
+        }
+        else if (a->arr[0] > a->arr[1])
+        {
+            apply_op(SA, a, b);
+        }
+        else if (a->arr[1] > a->arr[2])
+        {
+            apply_op(RRA, a, b);
+            if (a->arr[0] > a->arr[1])
+                apply_op(SA, a, b);
+        }
+    }
 }
-
-void print_stacks(t_stack *sa, t_stack *sb)
-{
-    printf("\nA\n");
-	for (size_t j = 0; j <  sa -> size; j++)
-        printf("%d ", sa -> arr[j]);
-    printf("\nB\n");
-    
-	for (size_t j = 0; j <  sb -> size; j++)
-        printf("%d ", sb -> arr[j]);
-}
-
 
 void sort_stack(int *stack, size_t ssize)
 {
-    t_stack     a;
-    t_stack     b;
-    t_op        sequence[MAX_OPS] = {0};
+    t_stack a;
+    t_stack b;
 
     a.arr = stack;
     a.size = ssize;
     b.arr = malloc(sizeof(int) * ssize);
     b.size = 0;
-    printf("ssize:%ld\n", ssize);
-    // brute_force(&a, &b, 0, sequence, ssize);
+    
+    // printf("ssize:%ld\n", ssize);
+    
+    // Check if already sorted
+    if (is_sorted(&a))
+    {
+        free(b.arr);
+        return;
+    }
+    normalize(a.arr, a.size);
+    
+    if (ssize <= 5)
+        sort_small(&a, &b);
+    else
+	//  if (ssize <= 100)
+    //     insertion_sort(&a, &b);
+    // else
+	{
 
-
-    print_stacks(&a, &b);
-
+        radix_sort(&a, &b);
+		// radix_sort(&a, &b);
+		// optimize_seq(&seq);
+	}
+    
+    // print_stacks(&a, &b);
     free(b.arr);
 }

@@ -65,3 +65,49 @@ int pop(t_stack *stack, char shift)
         res = stack -> arr[stack -> size];
     return res;
 }
+
+
+// Function to normalize the stack (convert to indices)
+void normalize(int *stack, size_t size)
+{
+    int *sorted = malloc(sizeof(int) * size);
+    int *normalized = malloc(sizeof(int) * size);
+    
+    // Copy the original stack
+    for (size_t i = 0; i < size; i++)
+        sorted[i] = stack[i];
+    
+    // Sort the copy
+    for (size_t i = 0; i < size - 1; i++)
+    {
+        for (size_t j = 0; j < size - i - 1; j++)
+        {
+            if (sorted[j] > sorted[j + 1])
+            {
+                int temp = sorted[j];
+                sorted[j] = sorted[j + 1];
+                sorted[j + 1] = temp;
+            }
+        }
+    }
+    
+    // Create normalized array
+    for (size_t i = 0; i < size; i++)
+    {
+        for (size_t j = 0; j < size; j++)
+        {
+            if (stack[i] == sorted[j])
+            {
+                normalized[i] = j;
+                break;
+            }
+        }
+    }
+    
+    // Copy normalized values back to original stack
+    for (size_t i = 0; i < size; i++)
+        stack[i] = normalized[i];
+    
+    free(sorted);
+    free(normalized);
+}
