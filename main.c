@@ -6,7 +6,7 @@
 /*   By: nmkrtchy <nmkrtchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:19:48 by nmkrtchy          #+#    #+#             */
-/*   Updated: 2025/04/04 20:14:20 by nmkrtchy         ###   ########.fr       */
+/*   Updated: 2025/04/08 19:23:52 by nmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,3 @@ int	main(int argc, char **argv)
 	free(arr);
 	return (EXIT_SUCCESS);
 }
-
-	// i = (int)(1L << 31);
-	// printf("\n%d", i - 1);

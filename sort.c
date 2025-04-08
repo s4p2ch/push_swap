@@ -1,8 +1,12 @@
 #include "header.h"
 
 
+void mega_sort(t_stack *a, t_stack *b)
+{
+    
+}
 
-void sort_small(t_stack *a, t_stack *b)
+void micro_sort(t_stack *a, t_stack *b)
 {
     if (a->size == 2)
     {
@@ -51,18 +55,9 @@ void sort_stack(int *stack, size_t ssize)
     normalize(a.arr, a.size);
     
     if (ssize <= 5)
-        sort_small(&a, &b);
+        micro_sort(&a, &b);
     else
-	//  if (ssize <= 100)
-    //     insertion_sort(&a, &b);
-    // else
-	{
-
-        radix_sort(&a, &b);
-		// radix_sort(&a, &b);
-		// optimize_seq(&seq);
-	}
+        mega_sort(&a, &b);
     
-    // print_stacks(&a, &b);
     free(b.arr);
 }

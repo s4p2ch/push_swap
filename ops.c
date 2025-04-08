@@ -52,7 +52,5 @@ void apply_op(t_op op, t_stack *a_stack, t_stack *b_stack)
     else if (op == RRB && b_stack->size > 1)
         push(b_stack, pop(b_stack, -1), 1);
     
-    // Print the operation
-
     print_op(op);
 }
