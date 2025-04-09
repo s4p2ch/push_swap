@@ -22,29 +22,29 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-void ft_write(char *str)
+void	ft_write(char *str)
 {
 	write(1, str, ft_strlen(str));
 }
 
-void print_seq(t_op seq[], size_t size)
+void	print_seq(t_op seq[], size_t size)
 {
-	const char 		*op_names[11];
-	size_t			i;
+	const char	*op_names[11];
+	size_t		i;
 
-    op_names[SA] = "sa";
-    op_names[SB] = "sb";
-    op_names[SS] = "ss";
-    op_names[PA] = "pa";
-    op_names[PB] = "pb";
-    op_names[RA] = "ra";
-    op_names[RB] = "rb";
-    op_names[RR] = "rr";
-    op_names[RRA] = "rra";
-    op_names[RRB] = "rrb";
-    op_names[RRR] = "rrr";
+	op_names[SA] = "sa";
+	op_names[SB] = "sb";
+	op_names[SS] = "ss";
+	op_names[PA] = "pa";
+	op_names[PB] = "pb";
+	op_names[RA] = "ra";
+	op_names[RB] = "rb";
+	op_names[RR] = "rr";
+	op_names[RRA] = "rra";
+	op_names[RRB] = "rrb";
+	op_names[RRR] = "rrr";
 	i = 0;
-	while(i < size)
+	while (i < size)
 	{
 		ft_write((char *)op_names[seq[i]]);
 		ft_write("\n");
@@ -56,7 +56,7 @@ void print_seq(t_op seq[], size_t size)
 // ./main 9 8 3 4 2 6 4
 int	frequency(void *arr, int size, int num)
 {
-	int res;
+	int	res;
 
 	res = 0;
 	while (size >= 0)
@@ -66,23 +66,21 @@ int	frequency(void *arr, int size, int num)
 			arr++;
 			size--;
 		}
-	else
-	{
-		size--;
-		arr++;
-	}
+		else
+		{
+			size--;
+			arr++;
+		}
 	return (res);
 }
-
-
 
 // Calculate the cost of moving an element to the top of stack A
 // int cost_to_top(size_t pos, size_t size)
 // {
 //     if (pos <= size / 2)
-//         return pos; // Use ra
+//         return (pos); // Use ra
 //     else
-//         return size - pos; // Use rra
+//         return (size - pos); // Use rra
 // }
 
 // // Move element at position pos to the top of stack A

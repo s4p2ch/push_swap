@@ -27,8 +27,8 @@ int	ft_atoi(char *str, int *i)
 	while (*str)
 		if (*str >= '0' && *str <= '9')
 			res = res * 10 + *str++ - '0';
-	else
-		return (*i = -1, 0);
+		else
+			return (*i = -1, 0);
 	if (res * sign != (int)(res * sign))
 		return (*i = -1, 0);
 	return (res * sign);
@@ -39,11 +39,11 @@ int	in_arr(int *arr, int size, int num)
 	while (size > 0)
 		if (*arr == num)
 			return (1);
-	else
-	{
-		size--;
-		arr++;
-	}
+		else
+		{
+			size--;
+			arr++;
+		}
 	return (0);
 }
 
@@ -60,8 +60,8 @@ int	parse(char *strnum, int *arr, int i)
 
 int	main(int argc, char **argv)
 {
-	int		*arr;
-	size_t	i;
+	int *arr;
+	size_t i;
 
 	if (argc < 2)
 		return (ft_write(argv[0]), EXIT_FAILURE);

@@ -1,63 +1,59 @@
 #include "header.h"
 
-
-void mega_sort(t_stack *a, t_stack *b)
+void	micro_sort(t_data *s)
 {
-    
+	if (s->a->size == 2)
+	{
+		if (s->a->arr[0] > s->a->arr[1])
+			apply_op(SA, s);
+	}
+	else if (s->a->size == 3)
+	{
+		if (s->a->arr[0] > s->a->arr[1] && s->a->arr[0] > s->a->arr[2])
+		{
+			apply_op(RA, s);
+			if (s->a->arr[0] > s->a->arr[1])
+				apply_op(SA, s);
+		}
+		else if (s->a->arr[0] > s->a->arr[1])
+		{
+			apply_op(SA, s);
+		}
+		else if (s->a->arr[1] > s->a->arr[2])
+		{
+			apply_op(RRA, s);
+			if (s->a->arr[0] > s->a->arr[1])
+				apply_op(SA, s);
+		}
+	}
 }
 
-void micro_sort(t_stack *a, t_stack *b)
+void	mega_sort(t_data *s)
 {
-    if (a->size == 2)
-    {
-        if (a->arr[0] > a->arr[1])
-            apply_op(SA, a, b);
-    }
-    else if (a->size == 3)
-    {
-        if (a->arr[0] > a->arr[1] && a->arr[0] > a->arr[2])
-        {
-            apply_op(RA, a, b);
-            if (a->arr[0] > a->arr[1])
-                apply_op(SA, a, b);
-        }
-        else if (a->arr[0] > a->arr[1])
-        {
-            apply_op(SA, a, b);
-        }
-        else if (a->arr[1] > a->arr[2])
-        {
-            apply_op(RRA, a, b);
-            if (a->arr[0] > a->arr[1])
-                apply_op(SA, a, b);
-        }
-    }
+	apply_op(PB, s);
+	apply_op(PB, s);
+	apply_op(PB, s);
+	// micro_sort(s -> b, 0);
 }
 
-void sort_stack(int *stack, size_t ssize)
+void	sort_stack(int *stack, size_t ssize)
 {
-    t_stack a;
-    t_stack b;
+	t_data	stacks;
 
-    a.arr = stack;
-    a.size = ssize;
-    b.arr = malloc(sizeof(int) * ssize);
-    b.size = 0;
-    
-    // printf("ssize:%ld\n", ssize);
-    
-    // Check if already sorted
-    if (is_sorted(&a))
-    {
-        free(b.arr);
-        return;
-    }
-    normalize(a.arr, a.size);
-    
-    if (ssize <= 5)
-        micro_sort(&a, &b);
-    else
-        mega_sort(&a, &b);
-    
-    free(b.arr);
+	stacks.a->arr = stack;
+	stacks.b->arr = malloc(sizeof(int) * ssize);
+	stacks.b->size = 0;
+	// printf("ssize:%ld\n", ssize);
+	// Check if already sorted
+	if (is_sorted(stacks.a))
+	{
+		free(stacks.b->arr);
+		return ;
+	}
+	normalize(stacks.a->arr, stacks.a->size);
+	if (ssize <= 5)
+		micro_sort(&stacks);
+	else
+		mega_sort(&stacks);
+	free(stacks.b->arr);
 }

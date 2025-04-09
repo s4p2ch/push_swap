@@ -9,8 +9,6 @@ all: $(TARGET)
 
 $(TARGET): $(SRCS) $(DEPS)
 	$(CC) $(CFLAGS) $(SRCS) -o push_swap
-# $(TARGET): $(SRCS) $(DEPS)
-# 	$(CC) $(CFLAGS) $^ -o $@
 
 clean:
 	rm -f $(TARGET)
