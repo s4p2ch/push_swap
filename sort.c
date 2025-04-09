@@ -1,61 +1,7 @@
 #include "header.h"
 
-void print_stacks(t_stack *sa, t_stack *sb)
-{
-    printf("\nA\n");
-    for (size_t j = 0; j < sa->size; j++)
-        printf("%d ", sa->arr[j]);
-    printf("\nB\n");
-    
-    for (size_t j = 0; j < sb->size; j++)
-        printf("%d ", sb->arr[j]);
-    printf("\n");
-}
 
-// Calculate the cost of moving an element to the top of stack A
-// int cost_to_top(size_t pos, size_t size)
-// {
-//     if (pos <= size / 2)
-//         return pos; // Use ra
-//     else
-//         return size - pos; // Use rra
-// }
 
-// // Move element at position pos to the top of stack A
-// void move_to_top_a(t_stack *a, t_stack *b, size_t pos)
-// {
-//     if (pos <= a->size / 2)
-//     {
-//         // Use ra
-//         for (size_t i = 0; i < pos; i++)
-//             apply_op(RA, a, b);
-//     }
-//     else
-//     {
-//         // Use rra
-//         for (size_t i = 0; i < a->size - pos; i++)
-//             apply_op(RRA, a, b);
-//     }
-// }
-
-// // Move element at position pos to the top of stack B
-// void move_to_top_b(t_stack *a, t_stack *b, size_t pos)
-// {
-//     if (pos <= b->size / 2)
-//     {
-//         // Use rb
-//         for (size_t i = 0; i < pos; i++)
-//             apply_op(RB, a, b);
-//     }
-//     else
-//     {
-//         // Use rrb
-//         for (size_t i = 0; i < b->size - pos; i++)
-//             apply_op(RRB, a, b);
-//     }
-// }
-
-// Sort 2 or 3 elements in stack A
 void sort_small(t_stack *a, t_stack *b)
 {
     if (a->size == 2)
@@ -102,11 +48,8 @@ void sort_stack(int *stack, size_t ssize)
         free(b.arr);
         return;
     }
-    
-    // Normalize the stack (convert to indices)
     normalize(a.arr, a.size);
     
-    // For small stacks, use simple algorithms
     if (ssize <= 5)
         sort_small(&a, &b);
     else

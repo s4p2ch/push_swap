@@ -1,13 +1,37 @@
 #include "header.h"
 
+<<<<<<< HEAD
 void print_op(t_op op)
 {
     const char *op_str[] = {"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr"};
     printf("%s\n", op_str[op]);
+=======
+void print_stacks(t_stack *sa, t_stack *sb)
+{
+    printf("\ta   ");
+    for (size_t j = 0; j < sa->size; j++)
+        printf("%d ", sa->arr[j]);
+    printf("\t\tb   ");
+    
+    for (size_t j = 0; j < sb->size; j++)
+        printf("%d ", sb->arr[j]);
+    printf("\n");
+}
+
+void print_op(t_op op)
+{
+    const char *op_str[] = {"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr"};
+    printf("%s\t", op_str[op]);
+>>>>>>> ec5666068d6ad3cf25866e0290dff5648d8bb311
 }
 
 void apply_op(t_op op, t_stack *a_stack, t_stack *b_stack)
 {
+<<<<<<< HEAD
+=======
+    print_stacks(a_stack, b_stack);
+
+>>>>>>> ec5666068d6ad3cf25866e0290dff5648d8bb311
     if (op == SA || op == SB || op == SS)
     {
         if (a_stack->size >= 2 && (op == SA || op == SS))
@@ -39,5 +63,10 @@ void apply_op(t_op op, t_stack *a_stack, t_stack *b_stack)
         push(b_stack, pop(b_stack, -1), 1);
     
     // Print the operation
+<<<<<<< HEAD
     // print_op(op);
+=======
+
+    print_op(op);
+>>>>>>> ec5666068d6ad3cf25866e0290dff5648d8bb311
 }
