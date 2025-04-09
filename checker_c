@@ -1,0 +1,26 @@
+#include "header.h"
+
+int check(int *stack)
+{
+	return 1;
+}
+
+int main(int argc, char **argv)
+{
+	int stack;
+	int i;
+	
+	stack = malloc(sizeof(int) * argc);
+	if (!stack)
+		return (ft_write("Error\n"), EXIT_FAILURE); //exit?
+	i = 0;
+	while (argv[++i])
+		if (parse(argv[i], stack, i - 1))
+			return (ft_write("Error\n"), free(stack), EXIT_FAILURE);
+	if (check(stack))
+		ft_write("OK\n");
+	else
+		ft_write("KO\n");
+	free(stack);
+	return (0);
+}

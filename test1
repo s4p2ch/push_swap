@@ -1,0 +1,13 @@
+ARG="2 4 1"; ./push_swap $ARG
+size:0
+old:10
+ra
+pb
+pb
+pa
+pa
+ra
+pb
+pb
+pa
+pa
