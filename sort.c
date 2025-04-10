@@ -5,6 +5,7 @@ void	print_stacks(t_stack *sa, t_stack *sb);
 void	do_micro_sort(t_data *ss, t_op swap, t_op rotate, t_op revrotate)
 {
 	t_stack	*s;
+	int		(*cmp)(int, int);
 
 	if (swap == SA)
 		s = ss->a;

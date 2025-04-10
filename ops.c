@@ -14,7 +14,7 @@ void	print_stacks(t_stack *sa, t_stack *sb)
 void	print_op(t_op op)
 {
 	const char	*op_str[] = {"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr",
-		"rra", "rrb", "rrr"};
+			"rra", "rrb", "rrr"};
 
 	printf("%s\t", op_str[op]);
 }
