@@ -6,7 +6,7 @@
 /*   By: nmkrtchy <nmkrtchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:20:03 by nmkrtchy          #+#    #+#             */
-/*   Updated: 2025/05/06 09:22:23 by nmkrtchy         ###   ########.fr       */
+/*   Updated: 2025/05/06 10:22:43 by nmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ typedef struct s_seq {
 	t_op op[MAX_OPS];
 	size_t size;
 } t_seq;
-
+int	in_arr(int *arr, int size, int num);
+int	parse(char *strnum, int *arr, int i);
+int	ft_atoi(char *str, int *i);
 int is_sorted(t_stack *a);
 void swap(int arr[]);
 void push(t_stack *stack, int num, char shift);

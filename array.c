@@ -1,16 +1,19 @@
 # include "header.h"
 
-int is_sorted(t_stack *a) {
-    size_t     i;
+int	is_sorted(t_stack *a)
+{
+	size_t	i;
 
-    i = 0;
-    while(i < a->size - 1)
-        if (a->arr[i] > a->arr[i + 1])
-            return 0;
-        else
-            i++;
-    return 1;
+	i = 0;
+	while (i < a->size - 1)
+	{
+		if (a->arr[i] > a->arr[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
 }
+
 
 void swap(int arr[])
 {

@@ -1,6 +1,6 @@
 #include "header.h"
 
-void micro_sort(t_stack *a, t_stack *b)
+static void micro_sort(t_stack *a, t_stack *b)
 {
     if (a->size == 2)
     {
@@ -28,46 +28,54 @@ void micro_sort(t_stack *a, t_stack *b)
     }
 }
 
-// Helper: find index of the minimum in A
-// static size_t find_min_pos(t_stack *a)
-// {
-//     size_t min_pos = 0;
-//     for (size_t i = 1; i < a->size; i++)
-//         if (a->arr[i] < a->arr[min_pos])
-//             min_pos = i;
-//     return min_pos;
-// }
+static size_t	find_min_idx(t_stack *a)
+{
+	size_t	i;
+	size_t	idx;
+	int		min;
 
-// void insertion_sort(t_stack *a, t_stack *b)
-// {
-//     size_t min_pos;
+	i = 0;
+	idx = 0;
+	min = a->arr[0];
+	while (i < a->size)
+	{
+		if (a->arr[i] < min)
+		{
+			min = a->arr[i];
+			idx = i;
+		}
+		i++;
+	}
+	return (idx);
+}
 
-//     // Phase 1: move all elements from A to B, smallest first
-//     while (a->size > 0)
-//     {
-//         min_pos = find_min_pos(a);
+void	mid_sort(t_stack *a, t_stack *b)
+{
+	size_t	pos;
 
-//         // rotate A to bring the minimum to the top
-//         if (min_pos <= a->size / 2)
-//         {
-//             while (min_pos--)
-//                 apply_op(RA, a, b);
-//         }
-//         else
-//         {
-//             size_t moves = a->size - min_pos;
-//             while (moves--)
-//                 apply_op(RRA, a, b);
-//         }
+	while (a->size > 3)
+	{
+		pos = find_min_idx(a);
+		if (pos <= a->size / 2)
+			while (pos--)
+				apply_op(RA, a, b);
 
-//         // push the min element to B
-//         apply_op(PB, a, b);
-//     }
+		else
+		{
+			pos = a->size - pos;
+			while (pos--)
+				apply_op(RRA, a, b);
 
-//     // Phase 2: everything’s in B, smallest at bottom; push back to A
-//     while (b->size > 0)
-//         apply_op(PA, a, b);
-// }
+		}
+		apply_op(PB, a, b);
+
+	}
+	micro_sort(a, b);
+	while (b->size)
+		apply_op(PA, a, b);
+
+}
+
 
 void sort_stack(int *stack, size_t ssize)
 {
@@ -84,8 +92,10 @@ void sort_stack(int *stack, size_t ssize)
         return;
     }
     normalize(a.arr, a.size);
-    if (ssize <= 5)
+    if (ssize <= 3)
         micro_sort(&a, &b);
+	else if (ssize < 100)
+		mid_sort(&a, &b);
 	else
 		butterfly_sort(&a, &b);
     free(b.arr);
