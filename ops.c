@@ -15,12 +15,12 @@ void print_stacks(t_stack *sa, t_stack *sb)
 void print_op(t_op op)
 {
     const char *op_str[] = {"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr"};
-    printf("%s\t", op_str[op]);
+    printf("%s\n", op_str[op]);
 }
 
 void apply_op(t_op op, t_stack *a_stack, t_stack *b_stack)
 {
-    print_stacks(a_stack, b_stack);
+    // print_stacks(a_stack, b_stack);
 
     if (op == SA || op == SB || op == SS)
     {

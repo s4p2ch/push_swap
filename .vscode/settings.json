@@ -1,0 +1,13 @@
+{
+	"files.associations": {
+		"*.embeddedhtml": "html",
+		"header.h": "c",
+		"stdlib.h": "c",
+		"stdio.h": "c",
+		"algorithm": "c",
+		"random": "c",
+		"array": "c",
+		"string_view": "c",
+		"initializer_list": "c"
+	}
+}

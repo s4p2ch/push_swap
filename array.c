@@ -21,7 +21,7 @@ void swap(int arr[])
     arr[1] = temp;
 }
 
-// if dest is on the left of src
+// if dest is on the left of src in memory
 // it will copy arr from the end
 static void ft_memmove(int *dest, const int *src, size_t size) {
     if (dest < src)

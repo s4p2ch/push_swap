@@ -2,7 +2,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -std=c11
 
 TARGET =  push_swap
-SRCS = main.c utils.c sort.c array.c ops.c
+SRCS = main.c utils.c sort.c array.c ops.c butterfly.c split.c
 DEPS = header.h
 
 all: $(TARGET)

@@ -6,7 +6,7 @@
 /*   By: nmkrtchy <nmkrtchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:20:03 by nmkrtchy          #+#    #+#             */
-/*   Updated: 2025/04/04 13:06:08 by nmkrtchy         ###   ########.fr       */
+/*   Updated: 2025/05/06 09:22:23 by nmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,13 @@ int	ft_strlen(char *str);
 void ft_write(char *str);
 void print_seq(t_op[], size_t);
 void sort_stack(int *stack, size_t ssize);
-int	frequency(void *arr, int size, int num);
+char	**ft_split(const char *s, char c);
+int	free_split(char **split);
+int	count_words(const char *s, char c);
+// int	frequency(void *arr, int size, int num);
 void normalize(int *stack, size_t size);
+void butterfly_sort(t_stack *a, t_stack *b);
 
 void apply_op(t_op op, t_stack *a_stack, t_stack *b_stack);
-
-void radix_sort(t_stack *a, t_stack *b);
-int brute_force(t_stack *a, t_stack *b, size_t depth, t_op *seq, size_t ssize);
 
 #endif
