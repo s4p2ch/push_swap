@@ -43,55 +43,53 @@ static int	apply_str(char *op, t_stack *a, t_stack *b)
 		return (0);
 	return (1);
 }
-int	ft_atoi(char *str, int *i)
-{
-	long	res;
-	int		sign;
 
-	res = 0;
-	sign = 1;
-	if (*str == '-')
-	{
-		sign = -1;
-		str++;
-	}
-	while (*str)
-		if (*str >= '0' && *str <= '9')
-			res = res * 10 + *str++ - '0';
+int check(t_stack *a, t_stack *b)
+{
+	int		ret;
+	char	op[4];
+
+	ret = read_op(op);
+	while ( ret > 0 && apply_str(op, a, b))
+			ret = read_op(op);
+	if (ret < 0 || (ret > 0 && !apply_str(op, a, b)))
+		return (0);
+	if(is_sorted(a) && b->size == 0)
+		ft_write("OK\n");
 	else
-		return (*i = -1, 0);
-	if (res * sign != (int)(res * sign))
-		return (*i = -1, 0);
-	return (res * sign);
+		ft_write("KO\n");
+	return (1);
 }
 
 int	main(int argc, char **argv)
 {
 	char	**args;
-	int		count, *arr;
+	int		*arr;
+	size_t count;
 	size_t	i;
 	t_stack	a, b;
-	char	op[4];
-	int		ret;
 
 	if (argc < 2)
 		return (0);
-	args = (argc == 2) ? ft_split(argv[1], ' ') : &argv[1];
-	for (count = 0; args[count]; count++)
-		;
+	if (argc == 2)
+		args = ft_split(argv[1], ' ');
+	else
+		args =  &argv[1];
+	count = 0;
+	while (args[count])
+		count++;
 	if (!(arr = malloc(sizeof(int) * count)))
 		return (ft_write("Error1\n"), EXIT_FAILURE);
-	for (i = 0; i < (size_t)count; i++)
+	for (i = 0; i < count; i++)
 		if (parse(args[i], arr, i))
 			return (ft_write("Error2\n"), EXIT_FAILURE);
-	a.arr = arr; a.size = count;
-	b.arr = malloc(sizeof(int) * count); b.size = 0;
+	a.arr = arr;
+	a.size = count;
+	b.arr = malloc(sizeof(int) * count);
+	b.size = 0;
 	if (!b.arr)
-		return (ft_write("Error3\n"), EXIT_FAILURE);
-	while ((ret = read_op(op)) > 0 && apply_str(op, &a, &b))
-		;
-	if (ret < 0 || (ret > 0 && !apply_str(op, &a, &b)))
-		return (ft_write("Error4\n"), EXIT_FAILURE);
-	ft_write((is_sorted(&a) && b.size == 0) ? "OK\n" : "KO\n");
-	return (0);
+		return (ft_write("Error3\n"), free(arr), EXIT_FAILURE);
+	if(!check(&a, &b))
+		return (ft_write("Error4\n"), free(arr), free(b.arr), EXIT_FAILURE);
+	return (free(arr), free(b.arr), 0);
 }
