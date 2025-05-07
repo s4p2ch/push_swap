@@ -5,14 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmkrtchy <nmkrtchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 21:48:22 by nmkrtchy          #+#    #+#             */
-/*   Updated: 2025/05/07 22:04:13 by nmkrtchy         ###   ########.fr       */
+/*   Created: 2025/05/06 15:25:24 by nmkrtchy          #+#    #+#             */
+/*   Updated: 2025/05/07 12:09:42 by nmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
 
 static int	read_op(char *buf)
@@ -41,85 +40,69 @@ static int	read_op(char *buf)
 
 static int	apply_str(char *op, t_stack *a, t_stack *b)
 {
-	if (!strcmp(op, "sa"))
+	if (!ft_strcmp(op, "sa"))
 		apply_op(SA, a, b);
-	else if (!strcmp(op, "sb"))
+	else if (!ft_strcmp(op, "sb"))
 		apply_op(SB, a, b);
-	else if (!strcmp(op, "ss"))
+	else if (!ft_strcmp(op, "ss"))
 		apply_op(SS, a, b);
-	else if (!strcmp(op, "pa"))
+	else if (!ft_strcmp(op, "pa"))
 		apply_op(PA, a, b);
-	else if (!strcmp(op, "pb"))
+	else if (!ft_strcmp(op, "pb"))
 		apply_op(PB, a, b);
-	else if (!strcmp(op, "ra"))
+	else if (!ft_strcmp(op, "ra"))
 		apply_op(RA, a, b);
-	else if (!strcmp(op, "rb"))
+	else if (!ft_strcmp(op, "rb"))
 		apply_op(RB, a, b);
-	else if (!strcmp(op, "rr"))
+	else if (!ft_strcmp(op, "rr"))
 		apply_op(RR, a, b);
-	else if (!strcmp(op, "rra"))
+	else if (!ft_strcmp(op, "rra"))
 		apply_op(RRA, a, b);
-	else if (!strcmp(op, "rrb"))
+	else if (!ft_strcmp(op, "rrb"))
 		apply_op(RRB, a, b);
-	else if (!strcmp(op, "rrr"))
+	else if (!ft_strcmp(op, "rrr"))
 		apply_op(RRR, a, b);
 	else
 		return (0);
 	return (1);
 }
 
-static int	check(t_stack *a, t_stack *b)
+static int	init_stacks(t_stack *a, t_stack *b, int *arr, int size)
 {
-	int		ret;
-	char	op[4];
-
-	ret = read_op(op);
-	while (ret > 0 && apply_str(op, a, b))
-		ret = read_op(op);
-	if (ret < 0 || (ret > 0 && !apply_str(op, a, b)))
-		return (0);
-	if (is_sorted(a) && b->size == 0)
-		ft_write("OK\n");
-	else
-		ft_write("KO\n");
-	return (1);
-}
-
-static int	init_stacks(t_stack *a, t_stack *b, int size)
-{
+	a->arr = arr;
 	a->size = size;
 	b->arr = malloc(sizeof(int) * size);
 	b->size = 0;
 	if (!b->arr)
-		return (0);
-	return (1);
+		return (-1);
+	return (0);
 }
 
 int	main(int argc, char **argv)
 {
 	char	**args;
-	size_t	size;
 	size_t	i;
-	t_stack	a;
-	t_stack	b;
+	char	op[4];
+	int		ret;
 
+	int count, *arr;
+	t_stack a, b;
 	if (argc < 2)
 		return (0);
-	if (argc == 2)
-		args = ft_split(argv[1], ' ');
-	else
-		args = &argv[1];
-	size = 0;
-	while (args[size])
-		size++;
-	a.arr = malloc(sizeof(int) * size);
-	if (!a.arr)
+	args = (argc == 2) ? ft_split(argv[1], ' ') : &argv[1];
+	for (count = 0; args[count]; count++)
+		;
+	if (!(arr = malloc(sizeof(int) * count)))
 		return (ft_write("Error1\n"), EXIT_FAILURE);
-	i = 1;
-	while (i - 1 < size)
-		if (!(i++) && parse(args[i - 1], a.arr, i - 1))
+	for (i = 0; i < (size_t)count; i++)
+		if (parse(args[i], arr, i))
 			return (ft_write("Error2\n"), EXIT_FAILURE);
-	if (!init_stacks(&a, &b, size) || !check(&a, &b))
+	if (!init_stacks(&a, &b, arr, count))
 		return (ft_write("Error3\n"), EXIT_FAILURE);
-	return (free(b.arr), 0);
+	while ((ret = read_op(op)) > 0 && apply_str(op, &a, &b))
+		;
+	if (ret < 0 || (ret > 0 && !apply_str(op, &a, &b)))
+		return (ft_write("Error4\n"), EXIT_FAILURE);
+	ft_write((is_sorted(&a) && b.size == 0) ? "OK\n" : "KO\n");
+	return (0);
 }

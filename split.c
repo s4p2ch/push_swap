@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   split.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmkrtchy <nmkrtchy@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/07 22:05:38 by nmkrtchy          #+#    #+#             */
+/*   Updated: 2025/05/07 22:05:39 by nmkrtchy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 
 int	count_words(const char *s, char c)
@@ -49,7 +61,7 @@ int	free_split(char **split)
 	while (split[i])
 		free(split[i++]);
 	free(split);
-	return 0;
+	return (0);
 }
 
 char	**ft_split(const char *s, char c)
