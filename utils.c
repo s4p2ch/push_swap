@@ -6,7 +6,7 @@
 /*   By: nmkrtchy <nmkrtchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:19:52 by nmkrtchy          #+#    #+#             */
-/*   Updated: 2025/05/07 22:48:54 by nmkrtchy         ###   ########.fr       */
+/*   Updated: 2025/05/08 20:49:33 by nmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ int	in_arr(int *arr, int size, int num)
 	while (size > 0)
 		if (*arr == num)
 			return (1);
-		else
-		{
-			size--;
-			arr++;
-		}
+	else
+	{
+		size--;
+		arr++;
+	}
 	return (0);
 }
 

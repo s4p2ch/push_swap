@@ -6,7 +6,7 @@
 /*   By: nmkrtchy <nmkrtchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:32:26 by nmkrtchy          #+#    #+#             */
-/*   Updated: 2025/05/08 20:40:09 by nmkrtchy         ###   ########.fr       */
+/*   Updated: 2025/05/08 20:48:58 by nmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,10 @@ void	butterfly_sort(t_stack *a, t_stack *b)
 {
 	size_t	size;
 	size_t	chunk_size;
-	double	chunk_percent;
 	size_t	next;
 
 	size = a->size;
-	chunk_percent = 20.0 - (size - 100) * (15.0 / 400.0);
-	chunk_size = (size / 100) * chunk_percent;
+	chunk_size = (size / 100) * (20.0 - (size - 100) * (15.0 / 400.0));
 	next = 0;
 	while (a->size)
 	{

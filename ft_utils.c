@@ -6,7 +6,7 @@
 /*   By: nmkrtchy <nmkrtchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:46:19 by nmkrtchy          #+#    #+#             */
-/*   Updated: 2025/05/07 22:48:04 by nmkrtchy         ###   ########.fr       */
+/*   Updated: 2025/05/08 20:50:07 by nmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int	ft_atoi(char *str, int *i)
 	while (*str)
 		if (*str >= '0' && *str <= '9')
 			res = res * 10 + *str++ - '0';
-		else
-			return (*i = -1, 0);
+	else
+		return (*i = -1, 0);
 	if (res * sign != (int)(res * sign))
 		return (*i = -1, 0);
 	return (res * sign);

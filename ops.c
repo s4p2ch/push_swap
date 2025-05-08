@@ -6,7 +6,7 @@
 /*   By: nmkrtchy <nmkrtchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 22:41:55 by nmkrtchy          #+#    #+#             */
-/*   Updated: 2025/05/07 22:51:00 by nmkrtchy         ###   ########.fr       */
+/*   Updated: 2025/05/08 20:49:55 by nmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	print_op(t_op op)
 {
 	const char	*op_str[] = {"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr",
-			"rra", "rrb", "rrr"};
+		"rra", "rrb", "rrr"};
 
 	printf("%s\n", op_str[op]);
 }
