@@ -25,7 +25,6 @@ rm -rf 0
 
 FILE=$PWD/push_swap
 FICHERO=test_check.txt
-CHECKER=./checker
 
 if [ -f "$FILE" ]; then
 	echo -n
@@ -40,12 +39,12 @@ if [ -z "$2" ];then
 else
 	n=$2;
 fi
-ARG=$(seq -250 249 | shuf | tr '\n' ' '); ./push_swap $ARG | ./pro_checker $ARG
+ARG=$(seq -250 249 | shuf | tr '\n' ' '); ./push_swap $ARG | ./pro_checker_linux $ARG
 exit 0
 fi
 
 if [ $1 == -v2 ];then
-ARG=$2; ./push_swap $ARG | ./pro_checker $ARG
+ARG=$2; ./push_swap $ARG | ./pro_checker_linux $ARG
 exit 0
 fi
 
@@ -54,36 +53,6 @@ fi
 printf ${BLUE}"\n-------------------------------------------------------------\n"${DEF_COLOR};
 printf ${BLUE}"\n\t\t\tBasic input\t\t\n"${DEF_COLOR};
 printf ${BLUE}"\n-------------------------------------------------------------\n\n"${DEF_COLOR};
-
-
-# Test function
-test() {
-	local num="$3"
-	local arg="$1"
-	local max_lines="$2"
-
-	local line_count
-	local checker_result
-
-	# Count number of lines (instructions)
-	line_count=$(./push_swap $arg | wc -l)
-
-	# Part 1: instruction count test
-	if [ "$line_count" -lt "$max_lines" ]; then
-		printf "${GREEN}${num}.[OK] ${DEF_COLOR}"
-	else
-		printf "${RED}${num}.[KO] ${DEF_COLOR}"
-		printf "${WHITE} TEST: $arg ${DEF_COLOR}"
-	fi
-
-	# Part 2: checker result
-	checker_result=$(./push_swap $arg | $CHECKER $arg | grep -E '^(OK|KO)$')
-	if [ "$checker_result" == "OK" ]; then
-		printf "${GREEN}$((num + 1)).[OK] ${DEF_COLOR}\n"
-	else
-		printf "${RED}$((num + 1)).[KO] ${DEF_COLOR}\n"
-	fi
-}
 
 ARG="2 1";
 N=$(./push_swap $ARG | wc -l)
@@ -94,7 +63,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}2.[OK] ${DEF_COLOR}";
 else
@@ -110,7 +79,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}4.[OK] ${DEF_COLOR}";
 else
@@ -126,7 +95,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}6.[OK] ${DEF_COLOR}";
 else
@@ -142,7 +111,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}8.[OK] ${DEF_COLOR}";
 else
@@ -158,7 +127,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}10.[OK] ${DEF_COLOR}";
 else
@@ -174,7 +143,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}12.[OK] ${DEF_COLOR}";
 else
@@ -190,7 +159,7 @@ else
 	echo -n "$ARG "
 fi
 
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}14.[OK] ${DEF_COLOR}";
 else
@@ -206,7 +175,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}16.[OK] ${DEF_COLOR}";
 else
@@ -222,7 +191,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}18.[OK] ${DEF_COLOR}";
 else
@@ -238,7 +207,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}20.[OK] ${DEF_COLOR}";
 else
@@ -254,7 +223,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}22.[OK] ${DEF_COLOR}";
 else
@@ -270,7 +239,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}24.[OK] ${DEF_COLOR}";
 else
@@ -286,7 +255,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}26.[OK] ${DEF_COLOR}";
 else
@@ -302,7 +271,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}28.[OK] ${DEF_COLOR}";
 else
@@ -318,7 +287,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}30.[OK] ${DEF_COLOR}";
 else
@@ -334,7 +303,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}32.[OK] ${DEF_COLOR}";
 else
@@ -350,7 +319,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}34.[OK] ${DEF_COLOR}";
 else
@@ -366,7 +335,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}36.[OK] ${DEF_COLOR}";
 else
@@ -382,7 +351,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}38.[OK] ${DEF_COLOR}";
 else
@@ -398,7 +367,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}40.[OK] ${DEF_COLOR}";
 else
@@ -414,7 +383,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}42.[OK] ${DEF_COLOR}";
 else
@@ -430,7 +399,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}44.[OK] ${DEF_COLOR}";
 else
@@ -446,7 +415,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}46.[OK] ${DEF_COLOR}";
 else
@@ -462,7 +431,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}48.[OK] ${DEF_COLOR}";
 else
@@ -478,7 +447,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}50.[OK] ${DEF_COLOR}";
 else
@@ -494,7 +463,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}52.[OK] ${DEF_COLOR}";
 else
@@ -510,7 +479,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}54.[OK] ${DEF_COLOR}";
 else
@@ -526,7 +495,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}56.[OK] ${DEF_COLOR}";
 else
@@ -542,7 +511,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}58.[OK] ${DEF_COLOR}";
 else
@@ -558,7 +527,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}60.[OK] ${DEF_COLOR}";
 else
@@ -581,7 +550,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}2.[OK] ${DEF_COLOR}";
 else
@@ -597,7 +566,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}4.[OK] ${DEF_COLOR}";
 else
@@ -613,7 +582,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}6.[OK] ${DEF_COLOR}";
 else
@@ -629,7 +598,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}8.[OK] ${DEF_COLOR}";
 else
@@ -645,7 +614,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}10.[OK] ${DEF_COLOR}";
 else
@@ -661,7 +630,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}12.[OK] ${DEF_COLOR}";
 else
@@ -678,7 +647,7 @@ else
 	echo -n "$ARG "
 fi
 
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}14.[OK] ${DEF_COLOR}";
 else
@@ -694,7 +663,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}16.[OK] ${DEF_COLOR}";
 else
@@ -710,7 +679,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}18.[OK] ${DEF_COLOR}";
 else
@@ -726,7 +695,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}20.[OK] ${DEF_COLOR}";
 else
@@ -742,7 +711,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}22.[OK] ${DEF_COLOR}";
 else
@@ -758,7 +727,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}24.[OK] ${DEF_COLOR}";
 else
@@ -774,7 +743,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}26.[OK] ${DEF_COLOR}";
 else
@@ -790,7 +759,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}28.[OK] ${DEF_COLOR}";
 else
@@ -806,7 +775,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}30.[OK] ${DEF_COLOR}";
 else
@@ -822,7 +791,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}32.[OK] ${DEF_COLOR}";
 else
@@ -838,7 +807,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}34.[OK] ${DEF_COLOR}";
 else
@@ -854,7 +823,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}36.[OK] ${DEF_COLOR}";
 else
@@ -870,7 +839,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}38.[OK] ${DEF_COLOR}";
 else
@@ -886,7 +855,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}40.[OK] ${DEF_COLOR}";
 else
@@ -902,7 +871,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}42.[OK] ${DEF_COLOR}";
 else
@@ -918,7 +887,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}44.[OK] ${DEF_COLOR}";
 else
@@ -934,7 +903,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}46.[OK] ${DEF_COLOR}";
 else
@@ -950,7 +919,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}48.[OK] ${DEF_COLOR}";
 else
@@ -966,7 +935,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}50.[OK] ${DEF_COLOR}";
 else
@@ -982,7 +951,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}52.[OK] ${DEF_COLOR}";
 else
@@ -998,7 +967,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}54.[OK] ${DEF_COLOR}";
 else
@@ -1014,7 +983,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}56.[OK] ${DEF_COLOR}";
 else
@@ -1030,7 +999,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}58.[OK] ${DEF_COLOR}";
 else
@@ -1046,7 +1015,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}60.[OK] ${DEF_COLOR}";
 else
@@ -1062,7 +1031,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}62.[OK] ${DEF_COLOR}";
 else
@@ -1078,7 +1047,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}64.[OK] ${DEF_COLOR}";
 else
@@ -1094,7 +1063,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}66.[OK] ${DEF_COLOR}";
 else
@@ -1110,7 +1079,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}68.[OK] ${DEF_COLOR}";
 else
@@ -1126,7 +1095,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}70.[OK] ${DEF_COLOR}";
 else
@@ -1142,7 +1111,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}72.[OK] ${DEF_COLOR}";
 else
@@ -1158,7 +1127,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}74.[OK] ${DEF_COLOR}";
 else
@@ -1174,7 +1143,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}76.[OK] ${DEF_COLOR}";
 else
@@ -1190,7 +1159,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}78.[OK] ${DEF_COLOR}";
 else
@@ -1206,7 +1175,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}80.[OK] ${DEF_COLOR}";
 else
@@ -1222,7 +1191,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}82.[OK] ${DEF_COLOR}";
 else
@@ -1238,7 +1207,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}84.[OK] ${DEF_COLOR}";
 else
@@ -1254,7 +1223,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}86.[OK] ${DEF_COLOR}";
 else
@@ -1270,7 +1239,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}88.[OK] ${DEF_COLOR}";
 else
@@ -1286,7 +1255,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}90.[OK] ${DEF_COLOR}";
 else
@@ -1302,7 +1271,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}92.[OK] ${DEF_COLOR}";
 else
@@ -1318,7 +1287,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}94.[OK] ${DEF_COLOR}";
 else
@@ -1334,7 +1303,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}96.[OK] ${DEF_COLOR}";
 else
@@ -1350,7 +1319,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}98.[OK] ${DEF_COLOR}";
 else
@@ -1366,7 +1335,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}100.[OK] ${DEF_COLOR}";
 else
@@ -1382,7 +1351,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}102.[OK] ${DEF_COLOR}";
 else
@@ -1398,7 +1367,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}104.[OK] ${DEF_COLOR}";
 else
@@ -1414,7 +1383,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}106.[OK] ${DEF_COLOR}";
 else
@@ -1430,7 +1399,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}108.[OK] ${DEF_COLOR}";
 else
@@ -1446,7 +1415,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}110.[OK] ${DEF_COLOR}";
 else
@@ -1462,7 +1431,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}112.[OK] ${DEF_COLOR}";
 else
@@ -1478,7 +1447,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}114.[OK] ${DEF_COLOR}";
 else
@@ -1494,7 +1463,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}116.[OK] ${DEF_COLOR}";
 else
@@ -1510,7 +1479,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}118.[OK] ${DEF_COLOR}";
 else
@@ -1526,7 +1495,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}120.[OK] ${DEF_COLOR}";
 else
@@ -1542,7 +1511,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}122.[OK] ${DEF_COLOR}";
 else
@@ -1558,7 +1527,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}124.[OK] ${DEF_COLOR}";
 else
@@ -1574,7 +1543,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}126.[OK] ${DEF_COLOR}";
 else
@@ -1590,7 +1559,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}128.[OK] ${DEF_COLOR}";
 else
@@ -1606,7 +1575,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}130.[OK] ${DEF_COLOR}";
 else
@@ -1622,7 +1591,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}132.[OK] ${DEF_COLOR}";
 else
@@ -1638,7 +1607,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}134.[OK] ${DEF_COLOR}";
 else
@@ -1654,7 +1623,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}136.[OK] ${DEF_COLOR}";
 else
@@ -1670,7 +1639,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}138.[OK] ${DEF_COLOR}";
 else
@@ -1686,7 +1655,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}140.[OK] ${DEF_COLOR}";
 else
@@ -1702,7 +1671,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}142.[OK] ${DEF_COLOR}";
 else
@@ -1718,7 +1687,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}144.[OK] ${DEF_COLOR}";
 else
@@ -1734,7 +1703,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}146.[OK] ${DEF_COLOR}";
 else
@@ -1750,7 +1719,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}148.[OK] ${DEF_COLOR}";
 else
@@ -1766,7 +1735,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}150.[OK] ${DEF_COLOR}";
 else
@@ -1782,7 +1751,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}152.[OK] ${DEF_COLOR}";
 else
@@ -1798,7 +1767,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}154.[OK] ${DEF_COLOR}";
 else
@@ -1814,7 +1783,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}156.[OK] ${DEF_COLOR}";
 else
@@ -1830,7 +1799,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}158.[OK] ${DEF_COLOR}";
 else
@@ -1846,7 +1815,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}160.[OK] ${DEF_COLOR}";
 else
@@ -1862,7 +1831,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}162.[OK] ${DEF_COLOR}";
 else
@@ -1878,7 +1847,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}164.[OK] ${DEF_COLOR}";
 else
@@ -1894,7 +1863,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}166.[OK] ${DEF_COLOR}";
 else
@@ -1910,7 +1879,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}168.[OK] ${DEF_COLOR}";
 else
@@ -1926,7 +1895,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}170.[OK] ${DEF_COLOR}";
 else
@@ -1942,7 +1911,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}172.[OK] ${DEF_COLOR}";
 else
@@ -1958,7 +1927,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}174.[OK] ${DEF_COLOR}";
 else
@@ -1974,7 +1943,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}176.[OK] ${DEF_COLOR}";
 else
@@ -1990,7 +1959,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}178.[OK] ${DEF_COLOR}";
 else
@@ -2006,7 +1975,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}180.[OK] ${DEF_COLOR}";
 else
@@ -2022,7 +1991,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}182.[OK] ${DEF_COLOR}";
 else
@@ -2038,7 +2007,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}184.[OK] ${DEF_COLOR}";
 else
@@ -2054,7 +2023,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}186.[OK] ${DEF_COLOR}";
 else
@@ -2070,7 +2039,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}188.[OK] ${DEF_COLOR}";
 else
@@ -2086,7 +2055,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}190.[OK] ${DEF_COLOR}";
 else
@@ -2102,7 +2071,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}192.[OK] ${DEF_COLOR}";
 else
@@ -2118,7 +2087,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}194.[OK] ${DEF_COLOR}";
 else
@@ -2134,7 +2103,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}196.[OK] ${DEF_COLOR}";
 else
@@ -2150,7 +2119,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}198.[OK] ${DEF_COLOR}";
 else
@@ -2166,7 +2135,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}200.[OK] ${DEF_COLOR}";
 else
@@ -2182,7 +2151,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}202.[OK] ${DEF_COLOR}";
 else
@@ -2198,7 +2167,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}204.[OK] ${DEF_COLOR}";
 else
@@ -2214,7 +2183,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}206.[OK] ${DEF_COLOR}";
 else
@@ -2230,7 +2199,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}208.[OK] ${DEF_COLOR}";
 else
@@ -2246,7 +2215,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}210.[OK] ${DEF_COLOR}";
 else
@@ -2262,7 +2231,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}212.[OK] ${DEF_COLOR}";
 else
@@ -2278,7 +2247,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}214.[OK] ${DEF_COLOR}";
 else
@@ -2294,7 +2263,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}216.[OK] ${DEF_COLOR}";
 else
@@ -2310,7 +2279,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}218.[OK] ${DEF_COLOR}";
 else
@@ -2326,7 +2295,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}220.[OK] ${DEF_COLOR}";
 else
@@ -2342,7 +2311,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}222.[OK] ${DEF_COLOR}";
 else
@@ -2358,7 +2327,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}224.[OK] ${DEF_COLOR}";
 else
@@ -2374,7 +2343,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}226.[OK] ${DEF_COLOR}";
 else
@@ -2390,7 +2359,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}228.[OK] ${DEF_COLOR}";
 else
@@ -2406,7 +2375,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}230.[OK] ${DEF_COLOR}";
 else
@@ -2422,7 +2391,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}232.[OK] ${DEF_COLOR}";
 else
@@ -2438,7 +2407,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}234.[OK] ${DEF_COLOR}";
 else
@@ -2454,7 +2423,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}236.[OK] ${DEF_COLOR}";
 else
@@ -2470,7 +2439,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}238.[OK] ${DEF_COLOR}";
 else
@@ -2486,7 +2455,7 @@ else
 	printf "${WHITE} TEST: ";
 	echo -n "$ARG "
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}240.[OK] ${DEF_COLOR}";
 else
@@ -2518,7 +2487,7 @@ cont=1
 while [ $cont -lt $val ]
 do
 ARG=$(seq 0 99 | shuf | tr '\n' ' ');
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}$cont .[OK]${DEF_COLOR}";
 	control=2
@@ -2646,7 +2615,7 @@ cont=1
 while [ $cont -lt $val ]
 do
 ARG=$(seq -250 249 | shuf | tr '\n' ' ');
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}$cont .[OK]${DEF_COLOR}";
 	control=2
@@ -2760,7 +2729,7 @@ if [ $N -eq 0 ]; then
 else
 	printf "${RED}1. [KO]${DEF_COLOR}";
 fi
-R=$(./push_swap $ARG | valgrind --leak-check=full ./checker $ARG > /dev/null 2>&1)
+R=$(./push_swap $ARG | valgrind --leak-check=full ./checker_linux $ARG > /dev/null 2>&1)
 R=$?
 if [[ $R == 0 ]]; then
   printf "${GREEN}[MOK] ${DEF_COLOR}\n";
@@ -2775,7 +2744,7 @@ if [ $N -eq 0 ]; then
 else
 	printf "${RED}2. [KO]${DEF_COLOR}";
 fi
-R=$(./push_swap $ARG | valgrind --leak-check=full ./checker $ARG > /dev/null 2>&1)
+R=$(./push_swap $ARG | valgrind --leak-check=full ./checker_linux $ARG > /dev/null 2>&1)
 R=$?
 if [[ $R == 0 ]]; then
   printf "${GREEN}[MOK] ${DEF_COLOR}\n";
@@ -2790,7 +2759,7 @@ if [ $N -eq 0 ]; then
 else
 	printf "${RED}3. [KO]${DEF_COLOR}";
 fi
-R=$(./push_swap $ARG | valgrind --leak-check=full ./checker $ARG > /dev/null 2>&1)
+R=$(./push_swap $ARG | valgrind --leak-check=full ./checker_linux $ARG > /dev/null 2>&1)
 R=$?
 if [[ $R == 0 ]]; then
   printf "${GREEN}[MOK] ${DEF_COLOR}\n";
@@ -2805,7 +2774,7 @@ if [ $N -eq 0 ]; then
 else
 	printf "${RED}4. [KO]${DEF_COLOR}";
 fi
-R=$(./push_swap $ARG | valgrind --leak-check=full ./checker $ARG > /dev/null 2>&1)
+R=$(./push_swap $ARG | valgrind --leak-check=full ./checker_linux $ARG > /dev/null 2>&1)
 R=$?
 if [[ $R == 0 ]]; then
   printf "${GREEN}[MOK] ${DEF_COLOR}\n";
@@ -2820,7 +2789,7 @@ if [ $N -eq 0 ]; then
 else
 	printf "${RED}5. [KO]${DEF_COLOR}";
 fi
-R=$(./push_swap $ARG | valgrind --leak-check=full ./checker $ARG > /dev/null 2>&1)
+R=$(./push_swap $ARG | valgrind --leak-check=full ./checker_linux $ARG > /dev/null 2>&1)
 R=$?
 if [[ $R == 0 ]]; then
   printf "${GREEN}[MOK] ${DEF_COLOR}\n";
@@ -2835,7 +2804,7 @@ if [ $N -eq 0 ]; then
 else
 	printf "${RED}6. [KO]${DEF_COLOR}";
 fi
-R=$(./push_swap $ARG | valgrind --leak-check=full ./checker $ARG > /dev/null 2>&1)
+R=$(./push_swap $ARG | valgrind --leak-check=full ./checker_linux $ARG > /dev/null 2>&1)
 R=$?
 if [[ $R == 0 ]]; then
   printf "${GREEN}[MOK] ${DEF_COLOR}\n";
@@ -2850,7 +2819,7 @@ if [ $N -eq 0 ]; then
 else
 	printf "${RED}7. [KO]${DEF_COLOR}";
 fi
-R=$(./push_swap $ARG | valgrind --leak-check=full ./checker $ARG > /dev/null 2>&1)
+R=$(./push_swap $ARG | valgrind --leak-check=full ./checker_linux $ARG > /dev/null 2>&1)
 R=$?
 if [[ $R == 0 ]]; then
   printf "${GREEN}[MOK] ${DEF_COLOR}\n";
@@ -2865,7 +2834,7 @@ if [ $N -eq 0 ]; then
 else
 	printf "${RED}8. [KO]${DEF_COLOR}";
 fi
-R=$(./push_swap $ARG | valgrind --leak-check=full ./checker $ARG > /dev/null 2>&1)
+R=$(./push_swap $ARG | valgrind --leak-check=full ./checker_linux $ARG > /dev/null 2>&1)
 R=$?
 if [[ $R == 0 ]]; then
   printf "${GREEN}[MOK] ${DEF_COLOR}\n";
@@ -2880,7 +2849,7 @@ if [ $N -eq 0 ]; then
 else
 	printf "${RED}9. [KO]${DEF_COLOR}";
 fi
-R=$(./push_swap $ARG | valgrind --leak-check=full ./checker $ARG > /dev/null 2>&1)
+R=$(./push_swap $ARG | valgrind --leak-check=full ./checker_linux $ARG > /dev/null 2>&1)
 R=$?
 if [[ $R == 0 ]]; then
   printf "${GREEN}[MOK] ${DEF_COLOR}\n";
@@ -2895,7 +2864,7 @@ if [ $N -eq 0 ]; then
 else
 	printf "${RED}10. [KO]${DEF_COLOR}";
 fi
-R=$(./push_swap $ARG | valgrind --leak-check=full ./checker $ARG > /dev/null 2>&1)
+R=$(./push_swap $ARG | valgrind --leak-check=full ./checker_linux $ARG > /dev/null 2>&1)
 R=$?
 if [[ $R == 0 ]]; then
   printf "${GREEN}[MOK] ${DEF_COLOR}\n";
@@ -2910,7 +2879,7 @@ if [ $N -eq 0 ]; then
 else
 	printf "${RED}11. [KO]${DEF_COLOR}";
 fi
-R=$(./push_swap $ARG | valgrind --leak-check=full ./checker $ARG > /dev/null 2>&1)
+R=$(./push_swap $ARG | valgrind --leak-check=full ./checker_linux $ARG > /dev/null 2>&1)
 R=$?
 if [[ $R == 0 ]]; then
   printf "${GREEN}[MOK] ${DEF_COLOR}\n";
@@ -2925,7 +2894,7 @@ if [ $N -eq 0 ]; then
 else
 	printf "${RED}12. [KO]${DEF_COLOR}";
 fi
-R=$(./push_swap $ARG | valgrind --leak-check=full ./checker $ARG > /dev/null 2>&1)
+R=$(./push_swap $ARG | valgrind --leak-check=full ./checker_linux $ARG > /dev/null 2>&1)
 R=$?
 if [[ $R == 0 ]]; then
   printf "${GREEN}[MOK] ${DEF_COLOR}\n";
@@ -2950,7 +2919,7 @@ elif [ $N -gt 8500 ] && [ $N -lt 10000 ]; then
 elif [ $N -gt 11500 ]; then
 	printf "${RED}[KO][1/5]${DEF_COLOR}";
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN} [OK]${DEF_COLOR}\n";
 else
@@ -2970,7 +2939,7 @@ elif [ $N -gt 8500 ] && [ $N -lt 10000 ]; then
 elif [ $N -gt 11500 ]; then
 	printf "${RED}[KO][1/5]${DEF_COLOR}";
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN} [OK]${DEF_COLOR}\n";
 else
@@ -2990,7 +2959,7 @@ elif [ $N -gt 8500 ] && [ $N -lt 10000 ]; then
 elif [ $N -gt 11500 ]; then
 	printf "${RED}[KO][1/5]${DEF_COLOR}";
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN} [OK]${DEF_COLOR}\n";
 else
@@ -3010,7 +2979,7 @@ elif [ $N -gt 8500 ] && [ $N -lt 10000 ]; then
 elif [ $N -gt 11500 ]; then
 	printf "${RED}[KO][1/5]${DEF_COLOR}";
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN} [OK]${DEF_COLOR}\n";
 else
@@ -3030,7 +2999,7 @@ elif [ $N -gt 8500 ] && [ $N -lt 10000 ]; then
 elif [ $N -gt 11500 ]; then
 	printf "${RED}[KO][1/5]${DEF_COLOR}";
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN} [OK]${DEF_COLOR}\n";
 else
@@ -3050,7 +3019,7 @@ elif [ $N -gt 8500 ] && [ $N -lt 10000 ]; then
 elif [ $N -gt 11500 ]; then
 	printf "${RED}[KO][1/5]${DEF_COLOR}";
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN} [OK]${DEF_COLOR}\n";
 else
@@ -3070,7 +3039,7 @@ elif [ $N -gt 8500 ] && [ $N -lt 10000 ]; then
 elif [ $N -gt 11500 ]; then
 	printf "${RED}[KO][1/5]${DEF_COLOR}";
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN} [OK]${DEF_COLOR}\n";
 else
@@ -3090,7 +3059,7 @@ elif [ $N -gt 8500 ] && [ $N -lt 10000 ]; then
 elif [ $N -gt 11500 ]; then
 	printf "${RED}[KO][1/5]${DEF_COLOR}";
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN} [OK]${DEF_COLOR}\n";
 else
@@ -3110,7 +3079,7 @@ elif [ $N -gt 8500 ] && [ $N -lt 10000 ]; then
 elif [ $N -gt 11500 ]; then
 	printf "${RED}[KO][1/5]${DEF_COLOR}";
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN} [OK]${DEF_COLOR}\n";
 else
@@ -3130,7 +3099,7 @@ elif [ $N -gt 8500 ] && [ $N -lt 10000 ]; then
 elif [ $N -gt 11500 ]; then
 	printf "${RED}[KO][1/5]${DEF_COLOR}";
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN} [OK]${DEF_COLOR}\n";
 else
@@ -3150,7 +3119,7 @@ elif [ $N -gt 8500 ] && [ $N -lt 10000 ]; then
 elif [ $N -gt 11500 ]; then
 	printf "${RED}[KO][1/5]${DEF_COLOR}";
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN} [OK]${DEF_COLOR}\n";
 else
@@ -3170,7 +3139,7 @@ elif [ $N -gt 8500 ] && [ $N -lt 10000 ]; then
 elif [ $N -gt 11500 ]; then
 	printf "${RED}[KO][1/5]${DEF_COLOR}";
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN} [OK]${DEF_COLOR}\n";
 else
@@ -3190,7 +3159,7 @@ elif [ $N -gt 8500 ] && [ $N -lt 10000 ]; then
 elif [ $N -gt 11500 ]; then
 	printf "${RED}[KO][1/5]${DEF_COLOR}";
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN} [OK]${DEF_COLOR}\n";
 else
@@ -3210,7 +3179,7 @@ elif [ $N -gt 8500 ] && [ $N -lt 10000 ]; then
 elif [ $N -gt 11500 ]; then
 	printf "${RED}[KO][1/5]${DEF_COLOR}";
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN} [OK]${DEF_COLOR}\n";
 else
@@ -3230,7 +3199,7 @@ elif [ $N -gt 8500 ] && [ $N -lt 10000 ]; then
 elif [ $N -gt 11500 ]; then
 	printf "${RED}[KO][1/5]${DEF_COLOR}";
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN} [OK]${DEF_COLOR}\n";
 else
@@ -3250,7 +3219,7 @@ elif [ $N -gt 8500 ] && [ $N -lt 10000 ]; then
 elif [ $N -gt 11500 ]; then
 	printf "${RED}[KO][1/5]${DEF_COLOR}";
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN} [OK]${DEF_COLOR}\n";
 else
@@ -3270,7 +3239,7 @@ elif [ $N -gt 8500 ] && [ $N -lt 10000 ]; then
 elif [ $N -gt 11500 ]; then
 	printf "${RED}[KO][1/5]${DEF_COLOR}";
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN} [OK]${DEF_COLOR}\n";
 else
@@ -3290,7 +3259,7 @@ elif [ $N -gt 8500 ] && [ $N -lt 10000 ]; then
 elif [ $N -gt 11500 ]; then
 	printf "${RED}[KO][1/5]${DEF_COLOR}";
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN} [OK]${DEF_COLOR}\n";
 else
@@ -3310,7 +3279,7 @@ elif [ $N -gt 8500 ] && [ $N -lt 10000 ]; then
 elif [ $N -gt 11500 ]; then
 	printf "${RED}[KO][1/5]${DEF_COLOR}";
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN} [OK]${DEF_COLOR}\n";
 else
@@ -3330,7 +3299,7 @@ elif [ $N -gt 8500 ] && [ $N -lt 10000 ]; then
 elif [ $N -gt 11500 ]; then
 	printf "${RED}[KO][1/5]${DEF_COLOR}";
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN} [OK]${DEF_COLOR}\n";
 else
@@ -3350,7 +3319,7 @@ elif [ $N -gt 8500 ] && [ $N -lt 10000 ]; then
 elif [ $N -gt 11500 ]; then
 	printf "${RED}[KO][1/5]${DEF_COLOR}";
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN} [OK]${DEF_COLOR}\n";
 else
@@ -3370,7 +3339,7 @@ elif [ $N -gt 8500 ] && [ $N -lt 10000 ]; then
 elif [ $N -gt 11500 ]; then
 	printf "${RED}[KO][1/5]${DEF_COLOR}";
 fi
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN} [OK]${DEF_COLOR}\n";
 else
@@ -3402,7 +3371,7 @@ while [ $cont -lt 6 ]
 do
 ARG=$(seq 0 $cont2 | shuf | tr '\n' ' ');
 N=$(./push_swap $ARG | wc -l)
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == "OK" ]; then
 	printf "${GREEN}$cont3 .[OK]${DEF_COLOR}";
 	((cont2++))
@@ -3455,12 +3424,12 @@ fi
 
 else
 
-FILE=$PWD/checker
+FILE=$PWD/checker_linux
 
 if [ -f "$FILE" ]; then
 	echo -n
 else
-	printf "${RED}NO EXIST CHECKER PROGRAM${DEF_COLOR}\n";
+	printf "${RED}NO EXIST checker_linux PROGRAM${DEF_COLOR}\n";
 	exit 0
 fi
 
@@ -3472,7 +3441,7 @@ printf ${MAGENTA}"\n------------------------------------------------------------
 printf ${MAGENTA}"\n\t\t\tCONTROL ERRORS\t\n"${DEF_COLOR};
 printf ${MAGENTA}"\n-------------------------------------------------------------\n\n"${DEF_COLOR};
 
-./checker "a" 2> test_check.txt > /dev/null
+./checker_linux "a" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3488,7 +3457,7 @@ else
 fi
 
 
-./checker "111a11" 2> test_check.txt > /dev/null
+./checker_linux "111a11" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3504,7 +3473,7 @@ else
 fi
 
 
-./checker "hello world" 2> test_check.txt > /dev/null
+./checker_linux "hello world" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3520,7 +3489,7 @@ else
 fi
 
 
-./checker "" 2> test_check.txt > /dev/null
+./checker_linux "" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3535,7 +3504,7 @@ else
 	printf "${RED}4.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "0 0" 2> test_check.txt > /dev/null
+./checker_linux "0 0" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3550,7 +3519,7 @@ else
 	printf "${RED}5.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "111-1 2 -3" 2> test_check.txt > /dev/null
+./checker_linux "111-1 2 -3" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3565,7 +3534,7 @@ else
 	printf "${RED}7.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "-3 -2 -2" 2> test_check.txt > /dev/null
+./checker_linux "-3 -2 -2" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3580,7 +3549,7 @@ else
 	printf "${RED}8.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "\n" 2> test_check.txt > /dev/null
+./checker_linux "\n" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3595,7 +3564,7 @@ else
 	printf "${RED}9.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "-2147483649" 2> test_check.txt > /dev/null
+./checker_linux "-2147483649" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3610,7 +3579,7 @@ else
 	printf "${RED}10.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "-2147483650" 2> test_check.txt > /dev/null
+./checker_linux "-2147483650" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3625,7 +3594,7 @@ else
 	printf "${RED}11.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "2147483648" 2> test_check.txt > /dev/null
+./checker_linux "2147483648" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3640,7 +3609,7 @@ else
 	printf "${RED}12.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "8 "9 1" 12" 2> test_check.txt > /dev/null
+./checker_linux "8 "9 1" 12" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3655,7 +3624,7 @@ else
 	printf "${RED}13.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "10 -1 -2 -3 -4 -5 -6 90 99 10" 2> test_check.txt > /dev/null
+./checker_linux "10 -1 -2 -3 -4 -5 -6 90 99 10" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3670,7 +3639,7 @@ else
 	printf "${RED}14.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "1 +1 -1" 2> test_check.txt > /dev/null
+./checker_linux "1 +1 -1" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3685,7 +3654,7 @@ else
 	printf "${RED}15.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "3333-3333 1 4" 2> test_check.txt > /dev/null
+./checker_linux "3333-3333 1 4" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3700,7 +3669,7 @@ else
 	printf "${RED}16.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "111a111 -4 3" 2> test_check.txt > /dev/null
+./checker_linux "111a111 -4 3" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3715,7 +3684,7 @@ else
 	printf "${RED}17.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "111111 "-4 3"" 2> test_check.txt > /dev/null
+./checker_linux "111111 "-4 3"" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3730,7 +3699,7 @@ else
 	printf "${RED}18.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "2147483649" 2> test_check.txt > /dev/null
+./checker_linux "2147483649" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3745,7 +3714,7 @@ else
 	printf "${RED}19.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "2147483647+1" 2> test_check.txt > /dev/null
+./checker_linux "2147483647+1" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3760,7 +3729,7 @@ else
 	printf "${RED}20.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "0 1 2 3 4 5 0" 2> test_check.txt > /dev/null
+./checker_linux "0 1 2 3 4 5 0" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3775,7 +3744,7 @@ else
 	printf "${RED}21.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "3 +3" 2> test_check.txt > /dev/null
+./checker_linux "3 +3" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3790,7 +3759,7 @@ else
 	printf "${RED}22.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "3+3" 2> test_check.txt > /dev/null
+./checker_linux "3+3" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3805,7 +3774,7 @@ else
 	printf "${RED}23.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "42 42" 2> test_check.txt > /dev/null
+./checker_linux "42 42" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3820,7 +3789,7 @@ else
 	printf "${RED}24.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "42 " -42" " 2> test_check.txt > /dev/null
+./checker_linux "42 " -42" " 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3835,7 +3804,7 @@ else
 	printf "${RED}25.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "4222-4222" 2> test_check.txt > /dev/null
+./checker_linux "4222-4222" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3850,7 +3819,7 @@ else
 	printf "${RED}26.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "99999999999999999999999999" 2> test_check.txt > /dev/null
+./checker_linux "99999999999999999999999999" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3865,7 +3834,7 @@ else
 	printf "${RED}27.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "-99999999999999999999999999" 2> test_check.txt > /dev/null
+./checker_linux "-99999999999999999999999999" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3880,7 +3849,7 @@ else
 	printf "${RED}28.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "0 -0 1 -1" 2> test_check.txt > /dev/null
+./checker_linux "0 -0 1 -1" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3895,7 +3864,7 @@ else
 	printf "${RED}29.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "0 +0 1 -1" 2> test_check.txt > /dev/null
+./checker_linux "0 +0 1 -1" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3910,7 +3879,7 @@ else
 	printf "${RED}30.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "111+111 -4 3" 2> test_check.txt > /dev/null
+./checker_linux "111+111 -4 3" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3927,7 +3896,7 @@ fi
 
 rm -rf test_check.txt
 
-./checker "-" 2> test_check.txt > /dev/null
+./checker_linux "-" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3944,7 +3913,7 @@ fi
 
 rm -rf test_check.txt
 
-./checker "+" 2> test_check.txt > /dev/null
+./checker_linux "+" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3959,7 +3928,7 @@ else
 	printf "${RED}33.[KO] ${DEF_COLOR}\n";
 fi
 
-./checker "--123 1 321" 2> test_check.txt > /dev/null
+./checker_linux "--123 1 321" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3976,7 +3945,7 @@ fi
 
 rm -rf test_check.txt
 
-./checker "++123 1 321" 2> test_check.txt > /dev/null
+./checker_linux "++123 1 321" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -3993,7 +3962,7 @@ fi
 
 rm -rf test_check.txt
 
-./checker "09 9 3 -1" 2> test_check.txt > /dev/null
+./checker_linux "09 9 3 -1" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -4010,7 +3979,7 @@ fi
 
 rm -rf test_check.txt
 
-./checker "00000001 1 9 3" 2> test_check.txt > /dev/null
+./checker_linux "00000001 1 9 3" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -4027,7 +3996,7 @@ fi
 
 rm -rf test_check.txt
 
-./checker "-5 00000003 003 9 1" 2> test_check.txt > /dev/null
+./checker_linux "-5 00000003 003 9 1" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -4044,7 +4013,7 @@ fi
 
 rm -rf test_check.txt
 
-echo -e "saa" | ./checker "1" 2> test_check.txt > /dev/null
+echo -e "saa" | ./checker_linux "1" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -4061,7 +4030,7 @@ fi
 
 rm -rf test_check.txt
 
-echo -e "sa\n" | ./checker "1" 2> test_check.txt > /dev/null
+echo -e "sa\n" | ./checker_linux "1" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -4078,7 +4047,7 @@ fi
 
 rm -rf test_check.txt
 
-echo -e "SA" | ./checker "1" 2> test_check.txt > /dev/null
+echo -e "SA" | ./checker_linux "1" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -4095,7 +4064,7 @@ fi
 
 rm -rf test_check.txt
 
-echo -e "sa " | ./checker "1" 2> test_check.txt > /dev/null
+echo -e "sa " | ./checker_linux "1" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -4112,7 +4081,7 @@ fi
 
 rm -rf test_check.txt
 
-echo -e "" | ./checker "1" 2> test_check.txt > /dev/null
+echo -e "" | ./checker_linux "1" 2> test_check.txt > /dev/null
 if [ -s "$FICHERO" ];then
 while IFS= read -r line
 do
@@ -4137,8 +4106,8 @@ printf ${MAGENTA}"\n------------------------------------------------------------
 
 #pruebas SA
 ARG="2 1 3";
-S=$(echo -e "sa" | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(echo -e "sa" | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(echo -e "sa" | ./checker_linux $ARG)
+R=$(echo -e "sa" | ./checker_linux $ARG)
 if [ $S == $R ]; then
 	printf "${GREEN}1.[OK] ${DEF_COLOR}\n";
 else
@@ -4147,8 +4116,8 @@ fi
 
 #pruebas SB
 ARG="2 1 3 4";
-S=$(echo -e "pb\npb\nsb\npa\npa" | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(echo -e "pb\npb\nsb\npa\npa" | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(echo -e "pb\npb\nsb\npa\npa" | ./checker_linux $ARG)
+R=$(echo -e "pb\npb\nsb\npa\npa" | ./checker_linux $ARG)
 if [ $S == $R ]; then
   printf "${GREEN}2.[OK] ${DEF_COLOR}\n";
 else
@@ -4157,9 +4126,9 @@ fi
 
 #pruebas SS
 ARG="2 1 4 3";
-S=$(echo -e "pb\npb\nss\npa\npa" | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(echo -e "pb\npb\nss\npa\npa" | $CHECKER $ARG | grep -E '^(OK|KO)$')
-L=$(echo -e "pb\npb\nss\npa\npa" | valgrind --leak-check=full ./checker $ARG > /dev/null 2>&1)
+S=$(echo -e "pb\npb\nss\npa\npa" | ./checker_linux $ARG)
+R=$(echo -e "pb\npb\nss\npa\npa" | ./checker_linux $ARG)
+L=$(echo -e "pb\npb\nss\npa\npa" | valgrind --leak-check=full ./checker_linux $ARG > /dev/null 2>&1)
 L=$?
 if [ $S == $R ]; then
   printf "${GREEN}3.[OK] ${DEF_COLOR}";
@@ -4174,8 +4143,8 @@ fi
 
 #pruebas RA
 ARG="2 1";
-S=$(echo -e "ra" | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(echo -e "ra" | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(echo -e "ra" | ./checker_linux $ARG)
+R=$(echo -e "ra" | ./checker_linux $ARG)
 if [ $S == $R ]; then
   printf "${GREEN}4.[OK] ${DEF_COLOR}\n";
 else
@@ -4184,8 +4153,8 @@ fi
 
 #pruebas RA
 ARG="100 101 1 2 3 4 5 6 7 8 9 10 11 12 13 14";
-S=$(echo -e "ra\nra" | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(echo -e "ra\nra" | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(echo -e "ra\nra" | ./checker_linux $ARG)
+R=$(echo -e "ra\nra" | ./checker_linux $ARG)
 if [ $S == $R ]; then
   printf "${GREEN}5.[OK] ${DEF_COLOR}\n";
 else
@@ -4194,9 +4163,9 @@ fi
 
 #pruebas de todo
 ARG="1";
-S=$(echo -e "sa\nsb\nss\npa\npb\npa\npb\nsb\npa\nra\nrb\nrr\nrra\nrrb\nrrr" | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(echo -e "sa\nsb\nss\npa\npb\npa\npb\nsb\npa\nra\nrb\nrr\nrra\nrrb\nrrr" | $CHECKER $ARG | grep -E '^(OK|KO)$')
-L=$(echo -e "sa\nsb\nss\npa\npb\npa\npb\nsb\npa\nra\nrb\nrr\nrra\nrrb\nrrr" | valgrind --leak-check=full ./checker $ARG > /dev/null 2>&1)
+S=$(echo -e "sa\nsb\nss\npa\npb\npa\npb\nsb\npa\nra\nrb\nrr\nrra\nrrb\nrrr" | ./checker_linux $ARG)
+R=$(echo -e "sa\nsb\nss\npa\npb\npa\npb\nsb\npa\nra\nrb\nrr\nrra\nrrb\nrrr" | ./checker_linux $ARG)
+L=$(echo -e "sa\nsb\nss\npa\npb\npa\npb\nsb\npa\nra\nrb\nrr\nrra\nrrb\nrrr" | valgrind --leak-check=full ./checker_linux $ARG > /dev/null 2>&1)
 L=$?
 if [ $S == $R ]; then
   printf "${GREEN}6.[OK] ${DEF_COLOR}";
@@ -4214,8 +4183,8 @@ printf ${MAGENTA}"\n\t\t\tBasic Input\t\t\n"${DEF_COLOR};
 printf ${MAGENTA}"\n-------------------------------------------------------------\n\n"${DEF_COLOR};
 
 ARG="2 1";
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ]; then
 	printf "${GREEN}1.[OK] ${DEF_COLOR}\n";
 else
@@ -4223,8 +4192,8 @@ else
 fi
 
 ARG="2 1 3";
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ]; then
 	printf "${GREEN}2.[OK] ${DEF_COLOR}\n";
 else
@@ -4232,8 +4201,8 @@ else
 fi
 
 ARG="1 3 2";
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ]; then
 	printf "${GREEN}3.[OK] ${DEF_COLOR}\n";
 else
@@ -4241,8 +4210,8 @@ else
 fi
 
 ARG="2 3 1";
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ]; then
 	printf "${GREEN}4.[OK] ${DEF_COLOR}\n";
 else
@@ -4250,8 +4219,8 @@ else
 fi
 
 ARG="3 2 1";
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ]; then
 	printf "${GREEN}5.[OK] ${DEF_COLOR}\n";
 else
@@ -4259,8 +4228,8 @@ else
 fi
 
 ARG="3 1 2";
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ]; then
 	printf "${GREEN}6.[OK] ${DEF_COLOR}\n";
 else
@@ -4269,8 +4238,8 @@ fi
 
 
 ARG="4 3 2 1";
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ]; then
 	printf "${GREEN}7.[OK] ${DEF_COLOR}\n";
 else
@@ -4278,8 +4247,8 @@ else
 fi
 
 ARG="4 2 1 3";
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ]; then
 	printf "${GREEN}8.[OK] ${DEF_COLOR}\n";
 else
@@ -4287,8 +4256,8 @@ else
 fi
 
 ARG="4 3 1 2";
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ]; then
 	printf "${GREEN}9.[OK] ${DEF_COLOR}\n";
 else
@@ -4296,8 +4265,8 @@ else
 fi
 
 ARG="3 2 1 4";
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ]; then
 	printf "${GREEN}10.[OK] ${DEF_COLOR}\n";
 else
@@ -4309,8 +4278,8 @@ printf ${MAGENTA}"\n\t\t\tSize 5\t\t\n"${DEF_COLOR};
 printf ${MAGENTA}"\n-------------------------------------------------------------\n\n"${DEF_COLOR};
 
 ARG="2 1 3 4 5";
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ]; then
 	printf "${GREEN}1.[OK] ${DEF_COLOR}\n";
 else
@@ -4318,8 +4287,8 @@ else
 fi
 
 ARG="5 4 3 2 1";
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ]; then
 	printf "${GREEN}2.[OK] ${DEF_COLOR}\n";
 else
@@ -4327,8 +4296,8 @@ else
 fi
 
 ARG="5 4 1 2 3";
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ]; then
 	printf "${GREEN}3.[OK] ${DEF_COLOR}\n";
 else
@@ -4336,8 +4305,8 @@ else
 fi
 
 ARG="5 4 3 1 2";
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ]; then
 	printf "${GREEN}4.[OK] ${DEF_COLOR}\n";
 else
@@ -4345,8 +4314,8 @@ else
 fi
 
 ARG="4 5 3 1 2";
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ]; then
 	printf "${GREEN}5.[OK] ${DEF_COLOR}\n";
 else
@@ -4354,8 +4323,8 @@ else
 fi
 
 ARG="3 2 1 5 4";
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ]; then
 	printf "${GREEN}6.[OK] ${DEF_COLOR}\n";
 else
@@ -4364,8 +4333,8 @@ fi
 
 
 ARG="1 2 3 5 4";
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ]; then
 	printf "${GREEN}7.[OK] ${DEF_COLOR}\n";
 else
@@ -4373,8 +4342,8 @@ else
 fi
 
 ARG="2 1 4 5 3";
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ]; then
 	printf "${GREEN}8.[OK] ${DEF_COLOR}\n";
 else
@@ -4382,8 +4351,8 @@ else
 fi
 
 ARG="1 3 2 5 4";
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ]; then
 	printf "${GREEN}9.[OK] ${DEF_COLOR}\n";
 else
@@ -4391,8 +4360,8 @@ else
 fi
 
 ARG="2 3 4 5 1";
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ]; then
 	printf "${GREEN}10.[OK] ${DEF_COLOR}\n";
 else
@@ -4419,8 +4388,8 @@ cont=1
 while [ $cont -lt $val ]
 do
 ARG=$(seq 0 99 | shuf | tr '\n' ' ')
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ] && [ $R == "OK" ]; then
 	printf "${GREEN}$cont .[OK] ${DEF_COLOR}";
 	((res_1++))
@@ -4466,8 +4435,8 @@ cont=1
 while [ $cont -lt $val ]
 do
 ARG=$(seq 0 499 | shuf | tr '\n' ' ');
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ] && [ $R == "OK" ]; then
 	printf "${GREEN}$cont .[OK] ${DEF_COLOR}";
 	((res_1++))
@@ -4510,8 +4479,8 @@ while [ $cont -lt $val ] && [ $var -lt 500 ]
 do
 ARG=$(seq 0 $var | shuf | tr '\n' ' ');
 var=$(($var + 1))
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ]; then
 	printf "${GREEN}$cont .[OK] ${DEF_COLOR}";
 	((res_1++))
@@ -4520,7 +4489,7 @@ else
 	echo TEST $cont ARG:"$ARG" >> traces.txt
  	((res_2++))
 fi
-R=$(./push_swap $ARG | valgrind --leak-check=full ./checker $ARG > /dev/null 2>&1)
+R=$(./push_swap $ARG | valgrind --leak-check=full ./checker_linux $ARG > /dev/null 2>&1)
 R=$?
 if [[ $R == 0 ]]; then
   printf "${GREEN}[MOK] ${DEF_COLOR}";
@@ -4535,8 +4504,8 @@ while [ $var -lt 1000 ]
 do
 ARG=$(seq 0 $var | shuf | tr '\n' ' ');
 var=$(($var + 25))
-S=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
-R=$(./push_swap $ARG | $CHECKER $ARG | grep -E '^(OK|KO)$')
+S=$(./push_swap $ARG | ./checker_linux $ARG)
+R=$(./push_swap $ARG | ./checker_linux $ARG)
 if [ $S == $R ]; then
 	printf "${GREEN}$cont .[OK] ${DEF_COLOR}";
 	((res_1++))
@@ -4545,7 +4514,7 @@ else
 	echo TEST $cont ARG:"$ARG" >> traces.txt
  	((res_2++))
 fi
-R=$(./push_swap $ARG | valgrind --leak-check=full ./checker $ARG > /dev/null 2>&1)
+R=$(./push_swap $ARG | valgrind --leak-check=full ./checker_linux $ARG > /dev/null 2>&1)
 R=$?
 if [[ $R == 0 ]]; then
   printf "${GREEN}[MOK] ${DEF_COLOR}";
