@@ -52,8 +52,8 @@ int	ft_atoi(char *str, int *i)
 	while (*str)
 		if (*str >= '0' && *str <= '9')
 			res = res * 10 + *str++ - '0';
-	else
-		return (*i = -1, 0);
+		else
+			return (*i = -1, 0);
 	if (res * sign != (int)(res * sign))
 		return (*i = -1, 0);
 	return (res * sign);

@@ -42,11 +42,11 @@ int	in_arr(int *arr, int size, int num)
 	while (size > 0)
 		if (*arr == num)
 			return (1);
-	else
-	{
-		size--;
-		arr++;
-	}
+		else
+		{
+			size--;
+			arr++;
+		}
 	return (0);
 }
 

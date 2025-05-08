@@ -6,13 +6,13 @@
 /*   By: nmkrtchy <nmkrtchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:32:26 by nmkrtchy          #+#    #+#             */
-/*   Updated: 2025/05/08 20:30:59 by nmkrtchy         ###   ########.fr       */
+/*   Updated: 2025/05/08 20:40:09 by nmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-// Find the position of the highest value in stack
+// find the position of the highest value in stack
 static int	find_max_pos(t_stack *b)
 {
 	int		max_pos;
@@ -49,46 +49,32 @@ static void	move_to_b(t_stack *a, t_stack *b)
 	}
 }
 
-void butterfly_sort(t_stack *a, t_stack *b)
+void	butterfly_sort(t_stack *a, t_stack *b)
 {
-    size_t size = a->size;
-	double chunk_percent = 20.0 - (size - 100) * (15.0 / 400.0); // 597 5144
-	   size_t chunk_size = (size / 100) * chunk_percent; // avg: 596 \ 5149
-    // size_t chunk_size = (size / 100) * 20; // avg: 633 \ 5322
-    // size_t chunk_size = 20 + (size / 100) * 5; // avg: 628 \ 5319
-    size_t next = 0; // next smallest value we expect
+	size_t	size;
+	size_t	chunk_size;
+	double	chunk_percent;
+	size_t	next;
 
-    while (a->size)
-        if ((size_t)a->arr[0] <= next)
-        {
-            apply_op(PB, a, b);
-            apply_op(RB, a, b);
-            next++;
-        }
-        else if ((size_t)a->arr[0] <= next + chunk_size)
-        {
-            apply_op(PB, a, b);
-            next++;
-        }
-        else
-            apply_op(RA, a, b);
-
-    move_to_b(a, b);
-
-    // while (b->size)
-    // {
-    //     int max_pos = find_max_pos(b);
-
-    //     if (max_pos <= (int)(b->size / 2))
-    //         while (max_pos--)
-    //             apply_op(RB, a, b);
-    //     else
-    //     {
-    //         max_pos = b->size - max_pos;
-    //         while (max_pos--)
-    //             apply_op(RRB, a, b);
-    //     }
-    //     apply_op(PA, a, b);
-    // }
+	size = a->size;
+	chunk_percent = 20.0 - (size - 100) * (15.0 / 400.0);
+	chunk_size = (size / 100) * chunk_percent;
+	next = 0;
+	while (a->size)
+	{
+		if ((size_t)a->arr[0] <= next)
+		{
+			apply_op(PB, a, b);
+			apply_op(RB, a, b);
+			next++;
+		}
+		else if ((size_t)a->arr[0] <= next + chunk_size)
+		{
+			apply_op(PB, a, b);
+			next++;
+		}
+		else
+			apply_op(RA, a, b);
+	}
+	move_to_b(a, b);
 }
-

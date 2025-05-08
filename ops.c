@@ -15,7 +15,7 @@
 void	print_op(t_op op)
 {
 	const char	*op_str[] = {"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr",
-		"rra", "rrb", "rrr"};
+			"rra", "rrb", "rrr"};
 
 	printf("%s\n", op_str[op]);
 }
